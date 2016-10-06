@@ -21,5 +21,7 @@ from tickets.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^tickets/$', tickets),
-    url(r'^ticket/([0-9]+)?/$', ticket)
+    url(r'^ticket/([0-9]+)?/$', ticket),
+    url(r'^page/([0-9]+)?/$', tickets),
+    #    url(r'^page/(\d+)/$'), tickets)
 ]

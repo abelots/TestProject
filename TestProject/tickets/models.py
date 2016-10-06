@@ -10,7 +10,6 @@ class AdminComment(models.Model):
     #file
     user = models.ForeignKey(User)
     create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
-
 class UserComment(models.Model):
     text = models.CharField(max_length=300)
     #file
@@ -23,10 +22,11 @@ class Ticket(models.Model):
     description = models.CharField(max_length=500,verbose_name='Описание')
     #file
     user = models.ForeignKey(User)
-    create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
+    create_date = models.DateTimeField( verbose_name='Дата создания')
     status = models.BooleanField(default=False)
-    admin_comments = models.ManyToManyField(AdminComment)
-    user_comments = models.ManyToManyField(UserComment)
+  #  admin_comments = models.ManyToManyField(AdminComment)
+   # user_comments = models.ManyToManyField(UserComment)
+
     def __unicode__(self):
         return self.title
 

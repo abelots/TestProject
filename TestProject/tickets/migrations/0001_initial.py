@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='ticket',
+            model_name='tickets',
             name='user_comments',
             field=models.ManyToManyField(to='tickets.UserComment'),
         ),

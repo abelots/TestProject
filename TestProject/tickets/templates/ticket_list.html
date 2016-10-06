@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+</head>
+<body>
+
+
+{% for ticket in new_tickets %}
+    <div><a href="/ticket/{{ ticket.id }}"></a> <a href="/ticket/{{ ticket.id }}" class="link-2">{{ ticket.title }}</a>
+        <p>{{ ticket.create_date}}</p>
+    </div>
+{% endfor %}
+
+</body>
+</html>

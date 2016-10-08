@@ -1,5 +1,4 @@
 """tickets URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
 Examples:
@@ -21,7 +20,11 @@ from tickets.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^tickets/$', tickets),
+    url(r'^$', tickets),
+    url(r'^ticket/([0-9]+)?/([0-9]+)?/$', ticket),
     url(r'^ticket/([0-9]+)?/$', ticket),
-    url(r'^page/([0-9]+)?/$', tickets),
+    url(r'^tickets/([0-9]+)?/$', tickets),
+    url(r'^ticket/addcomment/([0-9]+)?/$', addcomment),
+
     #    url(r'^page/(\d+)/$'), tickets)
 ]

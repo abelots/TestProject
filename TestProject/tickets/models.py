@@ -5,18 +5,6 @@ from django.utils import timezone
 
 
 
-class AdminComment(models.Model):
-    text = models.CharField(max_length=300)
-    #file
-    user = models.ForeignKey(User)
-    create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
-class UserComment(models.Model):
-    text = models.CharField(max_length=300)
-    #file
-    user = models.ForeignKey(User)
-    create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
-
-
 class Ticket(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     description = models.CharField(max_length=500,verbose_name='Описание')
@@ -24,11 +12,27 @@ class Ticket(models.Model):
     user = models.ForeignKey(User)
     create_date = models.DateTimeField( verbose_name='Дата создания')
     status = models.BooleanField(default=False)
-  #  admin_comments = models.ManyToManyField(AdminComment)
-   # user_comments = models.ManyToManyField(UserComment)
+
 
     def __unicode__(self):
         return self.title
+
+
+
+class AdminComment(models.Model):
+    text = models.CharField(max_length=300)
+    #file
+    ticket = models.ForeignKey(Ticket, default=None, related_name='admin_comments')
+    user = models.ForeignKey(User,default=None)
+    create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
+
+class UserComment(models.Model):
+    text = models.CharField(max_length=300)
+    #file
+    ticket = models.ForeignKey(Ticket, default=None, related_name='user_comments')
+    user = models.ForeignKey(User)
+    create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
+
 
 class Profile(models.Model):
     user = models.ForeignKey(User, related_name='profile')

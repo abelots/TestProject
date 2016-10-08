@@ -1,11 +1,75 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <meta charset="UTF-8">
     <title>Hello</title>
 </head>
 <body>
-<p> asdsad</p>
 
+    <div class="open">
+        <b> {{ ticket.title }}</b>
+        <p>{{ ticket.description }}</p>
+        <p>{{ ticket.create_date}}</p>
+    </div>
+
+     <hr>
+    <p>Комментарии:</p>
+    <div id="comments">
+        {%  for comment in comments %}
+            <p>{{ comment.text }}</p>
+            <hr>
+        {% endfor %}
+
+
+        {% if comments.has_next %}
+             <style>
+                  .descr { visibility: hidden; }
+              </style>
+            {% else %}
+             <style>
+                  .descr { visibility: visible ; }
+              </style>
+
+        {% endif %}
+
+
+
+
+
+
+        <div class="descr">
+        <form action="/ticket/addcomment/{{ ticket.id }}/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="button" value="Добавить комментарий">
+        </form>
+        </div>
+                <ul class="pagination">
+                {% if comments.has_previous %}
+                    <li class="arrow"><a href="/ticket/{{ ticket.id }}/{{ comments.previous_page_number }}/">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in comments.paginator.page_range %}
+                    {% if page == tickets.number %}
+                        <li class="current"><a href="/ticket/{{ ticket.id }}/{{ page }}/">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="/ticket/{{ ticket.id }}/{{ page }}/">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if comments.has_next %}
+                    <li class="arrow"><a href="/ticket/{{ ticket.id }}/{{ comments.next_page_number }}/">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+
+
+
+
+    </div>
 </body>
 </html>

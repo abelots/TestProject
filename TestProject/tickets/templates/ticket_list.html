@@ -26,29 +26,26 @@
      <hr>
 {% endfor %}
 
-    <div class="row">
-        <div class="large-3 large-offset-5 columns">
+
             <ul class="pagination">
                 {% if tickets.has_previous %}
-                    <li class="arrow"><a href="/page/{{ tickets.previous_page_number }}/">&laquo;</a></li>
+                    <li class="arrow"><a href="/tickets/{{ tickets.previous_page_number }}/">&laquo;</a></li>
                 {% else %}
                     <li class="arrow unavailable"><a href="">&laquo;</a></li>
                 {% endif %}
                 {% for page in tickets.paginator.page_range %}
                     {% if page == tickets.number %}
-                        <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                        <li class="current"><a href="/tickets/{{ page }}/">{{ page }}</a></li>
                     {% else %}
-                        <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                        <li><a href="/tickets/{{ page }}/">{{ page }}</a></li>
                     {% endif %}
                 {% endfor %}
                 {% if tickets.has_next %}
-                    <li class="arrow"><a href="/page/{{ tickets.next_page_number }}/">&raquo;</a></li>
+                    <li class="arrow"><a href="/tickets/{{ tickets.next_page_number }}/">&raquo;</a></li>
                 {% else %}
                     <li class="arrow unavailable"><a href="">&raquo;</a></li>
                 {% endif %}
-            </ul>
-        </div>
-    </div>
+
 
 
 </body>

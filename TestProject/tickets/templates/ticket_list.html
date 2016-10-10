@@ -21,6 +21,8 @@
 {% for ticket in tickets %}
     <div class="open"> <b> {{ ticket.title }}</b><input type="button" value="Открыть" onClick='location.href="/ticket/{{ ticket.id }}"'>
         <p>{{ ticket.create_date}}</p>
+      <img src="{{ ticket.user.profile.ava.url }}">
+        <p>sdcs</p>
     </div>
 
      <hr>

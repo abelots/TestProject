@@ -42,7 +42,7 @@
 
 
         <div class="descr">
-        <form action="/ticket/addcomment/{{ ticket.id }}/" method="post">
+        <form action="/ticket/addcomment/{{ ticket.id }}/" method="post"  enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
             <input type="submit" class="button" value="Добавить комментарий">

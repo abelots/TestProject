@@ -6,4 +6,4 @@ from models import AdminComment
 class CommentForm(ModelForm):
     class Meta:
         model = AdminComment
-        fields = ['text']
+        fields = ['text','attached_file']

@@ -20,8 +20,13 @@ from django.conf.urls.static import  static
 
 
 
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url(r'^api/', include('myrest.urls', namespace='api')),
+
     url(r'^tickets/$', tickets),
     url(r'^$', tickets),
     url(r'^ticket/([0-9]+)?/([0-9]+)?/$', ticket),
@@ -29,8 +34,8 @@ urlpatterns = [
     url(r'^tickets/([0-9]+)?/$', tickets),
     url(r'^ticket/addcomment/([0-9]+)?/$', addcomment),
 
+   # url(r'^', include('frontend.urls', namespace='frontend'))
 
-    #    url(r'^page/(\d+)/$'), tickets)
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

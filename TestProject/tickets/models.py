@@ -8,9 +8,9 @@ from django.utils import timezone
 class Ticket(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     description = models.CharField(max_length=500,verbose_name='Описание')
-    #files
-    user = models.ForeignKey(User)
-    create_date = models.DateTimeField( verbose_name='Дата создания')
+    attached_file = models.FileField(upload_to='files', blank=True)
+    user = models.ForeignKey(User,related_name='ticket')
+    create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
     status = models.BooleanField(default=False)
 
 
@@ -26,6 +26,10 @@ class Comment(models.Model):
     create_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
     class Meta:
         abstract = True
+
+
+    def __unicode__(self):
+        return self.text
 
 
 class AdminComment(Comment):

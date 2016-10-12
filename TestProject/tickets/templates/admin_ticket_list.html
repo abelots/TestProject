@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+ {% load staticfiles %}
+<html lang="en">
+
+
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+</head>
+<body>
+
+    <div>
+        <h1>Список тикетов</h1>
+
+
+    </div>
+
+
+
+{% for ticket in tickets %}
+    <div class="open"> <b> {{ ticket.title }}</b><input type="button" value="Открыть" onClick='location.href="/ticket/{{ ticket.id }}"'>
+        <p>{{ ticket.description }}</p>
+        <a href="/media/{{ ticket.attached_file }}/">{{ ticket.attached_file }}</a>
+
+        <p>{{ ticket.status }}</p>
+        </b><input type="button" value="Изменить Статус" onClick='location.href="/ticket/changestatus/{{ ticket.id }}/{{ tickets.number}}"'>
+        <p>{{ ticket.create_date}}</p>
+    </div>
+
+     <hr>
+{% endfor %}
+
+
+            <ul class="pagination">
+                {% if tickets.has_previous %}
+                    <li class="arrow"><a href="/tickets/{{ tickets.previous_page_number }}/">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in tickets.paginator.page_range %}
+                    {% if page == tickets.number %}
+                        <li class="current"><a href="/tickets/{{ page }}/">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="/tickets/{{ page }}/">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if tickets.has_next %}
+                    <li class="arrow"><a href="/tickets/{{ tickets.next_page_number }}/">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+
+
+
+</body>
+</html>

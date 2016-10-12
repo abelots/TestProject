@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^ticket/([0-9]+)?/$', ticket),
     url(r'^tickets/([0-9]+)?/$', tickets),
     url(r'^ticket/addcomment/([0-9]+)?/$', addcomment),
+    url(r'^ticket/changestatus/([0-9]+)?/([0-9]+)?/$', changestatus),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
     # url(r'^', include('frontend.urls', namespace='frontend'))

@@ -33,8 +33,9 @@ urlpatterns = [
     url(r'^ticket/([0-9]+)?/$', ticket),
     url(r'^tickets/([0-9]+)?/$', tickets),
     url(r'^ticket/addcomment/([0-9]+)?/$', addcomment),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
-   # url(r'^', include('frontend.urls', namespace='frontend'))
+    # url(r'^', include('frontend.urls', namespace='frontend'))
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

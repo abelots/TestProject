@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from myrest.serializers import TicketSerializer,AdminCommentSerializer,UserSerializer,AdminCommentSerializer,UserCommentSerializer
+from myrest.serializers import TicketSerializer,AdminCommentSerializer,UserSerializer,UserCommentSerializer,ProfileSerializer
 from tickets.models import *
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import CreateAPIView
@@ -53,3 +53,11 @@ class CreateUserView(CreateAPIView):
     model = get_user_model()
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
